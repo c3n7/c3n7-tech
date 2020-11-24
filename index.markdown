@@ -4,4 +4,6 @@
 
 layout: home
 title: Home
+twitter-title: c3n7
+banner: "/assets/images/banner.jpg"
 ---

@@ -3,6 +3,7 @@
 .sass-cache
 _site
 Gemfile.lock
+*firebase*
 
 .jekyll-cache
 vendor/
