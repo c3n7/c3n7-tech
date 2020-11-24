@@ -1,0 +1,129 @@
+I"�$<p>Today I aim to make you know more about how a Django project is structured. We’ll start with how to do initial setup, move on to describing how Django apps look like, talk about the request/response cycle, and templates</p>
+
+<h2 id="initial-setup">Initial Setup</h2>
+<p>We first have to setup the environment before we can create a Django project. You have to install Python then create a virtual environment. There are several ways of creating a virtual environment. Python 3.x has this functionality inbuilt:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>python <span class="nt">-m</span> venv myvenv
+</code></pre></div></div>
+<p>The <code class="language-plaintext highlighter-rouge">virtualenv</code> Python package can do the same thing. It has to be installed (ideally this only has to be done once).</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>pip <span class="nb">install </span>virtualenv
+<span class="nv">$ </span>virtualenv myvenv
+</code></pre></div></div>
+<p>Activate the virtual environment. On linux this would be done like:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">source </span>myvenv/bin/activate
+</code></pre></div></div>
+<p>Create a project and <code class="language-plaintext highlighter-rouge">cd</code> into it:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>django-admin startproject helloworld
+<span class="nv">$ </span><span class="nb">cd </span>helloworld
+</code></pre></div></div>
+
+<h1 id="a-django-project">A Django Project</h1>
+<p>Our project now looks like this:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helloworld
+├── db.sqlite3
+├── helloworld
+│   ├── __init__.py
+│   ├── asgi.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+└── manage.py
+</code></pre></div></div>
+<p>The outer level <code class="language-plaintext highlighter-rouge">helloworld</code> directory is a container for the project. This directory’s name does not matter to Django so you cam change it later on.</p>
+
+<p>The “inner” helloworld is the actual python package for your project. Its name is the Python package name you’ll need to use to import anything inside it. It has files like <code class="language-plaintext highlighter-rouge">settings.py</code> (which contains settings/configurations for the project), and <code class="language-plaintext highlighter-rouge">urls.py</code> (which contains URL declarations for the project).</p>
+
+<p><code class="language-plaintext highlighter-rouge">manage.py</code> is used to execute several Django commands for example, starting the development server, creating superuser account, and creating new apps among others.</p>
+
+<h2 id="django-apps">Django Apps</h2>
+<p>A Django project is structured into apps. Creating an new ap cam be done like:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>python manage.py startapp sampleapp
+</code></pre></div></div>
+<p>Our folder now looks like:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helloworld
+├── db.sqlite3
+├── helloworld
+│   ├── __init__.py
+│   ├── asgi.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+├── manage.py
+└── sampleapp
+    ├── __init__.py
+    ├── admin.py
+    ├── apps.py
+    ├── migrations
+    │   └── __init__.py
+    ├── models.py
+    ├── tests.py
+    └── views.py
+</code></pre></div></div>
+<p>A new directory with the name passed to <code class="language-plaintext highlighter-rouge">startapp</code> is created, in our case, <code class="language-plaintext highlighter-rouge">sampleapp</code>. In it there are these files:
+	- <code class="language-plaintext highlighter-rouge">admin.py</code> a configuration file for the built in Django Admin app.
+	- <code class="language-plaintext highlighter-rouge">apps.py</code> is a configuration file for the app itself.
+	- <code class="language-plaintext highlighter-rouge">migrations/</code> keeps track of any changes to the app’s <code class="language-plaintext highlighter-rouge">models.py</code>.
+	- <code class="language-plaintext highlighter-rouge">models.py</code> is where we define our database models which Django will translate into database tables.
+	- <code class="language-plaintext highlighter-rouge">tests.py</code> contains the app’s tests
+	- <code class="language-plaintext highlighter-rouge">views.py</code> handles the request/response logic for our app.
+To make the Django project “aware” of the new app we’ve added, we also have to add it in <code class="language-plaintext highlighter-rouge">settings.py</code></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s">'django.contrib.admin'</span><span class="p">,</span>
+    <span class="s">'django.contrib.auth'</span><span class="p">,</span>
+    <span class="s">'django.contrib.contenttypes'</span><span class="p">,</span>
+    <span class="s">'django.contrib.sessions'</span><span class="p">,</span>
+    <span class="s">'django.contrib.messages'</span><span class="p">,</span>
+    <span class="s">'django.contrib.staticfiles'</span><span class="p">,</span>
+    <span class="s">'sampleapp.apps.SampleappConfig'</span><span class="p">,</span> <span class="c1"># new
+</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h2 id="django-requestresponse-cycle">Django request/response cycle</h2>
+<p>When a user navigates to our project’s URL, a request/response sequence is initiated. It can visualized as:</p>
+
+<p><em>URL</em> -&gt; <em>View</em> -&gt; <em>Model</em> (if required) -&gt; <em>Template</em></p>
+
+<ul>
+  <li><em>URL</em> - you type <code class="language-plaintext highlighter-rouge">localhost:8000</code>, the default route is loaded by Django. When you enter <code class="language-plaintext highlighter-rouge">localhost:8000/about</code>, the about route is loaded by Django. The configured view for the route is loaded.</li>
+  <li><em>View</em> - the view configured to be shown for the particilar route is loaded. The view retreives data from the database, if required, formats it and presents it (for use in the template).</li>
+  <li><em>Template</em> - this is the markup that receives the formatted data from the view. The template is rendered to what thee user finally sees on the browser.</li>
+</ul>
+
+<h2 id="templates">Templates</h2>
+<p>An app ideally has its templates. By default, Django looks for the template within an app. For example, for our app <code class="language-plaintext highlighter-rouge">sampleapp</code>, Django looks for the templates in;</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>└── sampleapp
+    ├── templates
+    │  	 └── sampleapp
+    │        ├── home.html
+    │        └── about.html
+    └── ......
+</code></pre></div></div>
+<p>This repetitive structure is the default behavior that Django works with. It is, however, not the only workflow.</p>
+
+<p>You could create a custom directory for your template in the root directory and put your templates in it.</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir </span>mytemplates
+<span class="nv">$ </span><span class="nb">touch </span>mytemplates/home.html
+</code></pre></div></div>
+<p>Our project directory now looks like</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helloworld
+├── db.sqlite3
+├── helloworld
+│      └── ........
+├── mytemplates
+│      └── home.html
+├── manage.py
+└── sampleapp
+         └── .......
+</code></pre></div></div>
+<p>Since this is a custom directory, we have to make Django know it. We do this in <code class="language-plaintext highlighter-rouge">settings.py</code></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">TEMPLATES</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="p">...</span>
+        <span class="s">'DIRS'</span><span class="p">:</span> <span class="p">[</span><span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">BASE_DIR</span><span class="p">,</span> <span class="s">'mytemplates'</span><span class="p">)],</span> <span class="c1"># new
+</span>        <span class="p">...</span>
+    <span class="p">},</span>
+<span class="p">]</span>
+</code></pre></div></div>
+
+<h2 id="end">End</h2>
+<p>Thank you for reading through the document.</p>
+:ET

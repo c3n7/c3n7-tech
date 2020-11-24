@@ -1,0 +1,223 @@
+I"bM<p>Vim can work with GDB to debug C++ programs. This feature works in Vim version 8.1+. In this blog post, we’ll go through debugging C++ in Vim.</p>
+
+<h2 id="setting-things-up">Setting Things Up</h2>
+<p>You need to load the plugin using the command:</p>
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">:</span><span class="k">packadd</span> termdebug
+</code></pre></div></div>
+<p>You have to do this every time you want to debug. If you want this to happen automatically, add the command to your <code class="language-plaintext highlighter-rouge">.vimrc</code>.</p>
+
+<p><em>In vimrc</em>:</p>
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">packadd</span> termdebug
+</code></pre></div></div>
+
+<h3 id="the-sample-program">The Sample Program</h3>
+<p>The code below is for the sample program that we are going to debug. Open vim and type it. We are going to save it as <code class="language-plaintext highlighter-rouge">hello.cpp</code></p>
+
+<p><em>in hello.cpp</em></p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;iostream&gt;
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Hello world!"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">age</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Your age is: "</span> <span class="o">&lt;&lt;</span> <span class="n">age</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="compiling-it">Compiling It:</h3>
+<p>We are going to compile the program using <code class="language-plaintext highlighter-rouge">g++</code>:<br />
+<em>in your terminal</em>:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>g++ <span class="nt">-g</span> hello.cpp <span class="nt">-o</span> hello
+</code></pre></div></div>
+<p>The <code class="language-plaintext highlighter-rouge">-g</code> flag tells g++ to produce debugging information that <code class="language-plaintext highlighter-rouge">gdb</code> can work with.</p>
+
+<h2 id="debugging">Debugging</h2>
+<h3 id="loading-the-program">Loading the Program</h3>
+<p>Assuming you still have the program open in vim, we can start debugging by either of these two ways:</p>
+
+<h4 id="variant-1">Variant 1</h4>
+<p>Termdebug accepts the program name as the argument. In our case, we compiled <code class="language-plaintext highlighter-rouge">hello.cpp</code> to <code class="language-plaintext highlighter-rouge">hello</code>.</p>
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">:</span>Termdebug hello
+</code></pre></div></div>
+
+<h4 id="variant-2">Variant 2</h4>
+<p>The argument is optional so you can still start the debugging environment by just typing:</p>
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">:</span>Termdebug
+</code></pre></div></div>
+<p>In this case, however, we have to explicitly make GDB know the file/program we are going to debug:<br />
+<em>in the GDB window inside of vim</em>:</p>
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span>gdb<span class="p">)</span> <span class="k">file</span> hello
+</code></pre></div></div>
+
+<h3 id="running-the-program">Running the Program</h3>
+<p>Once you have started <code class="language-plaintext highlighter-rouge">Termdebug</code>, you can run it either of the following two ways:</p>
+<ol>
+  <li>Through a Vim command:
+    <div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">:</span>Run
+</code></pre></div>    </div>
+  </li>
+  <li>In the <code class="language-plaintext highlighter-rouge">GDB</code> window:
+    <div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span>gdb<span class="p">)</span> run
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>Here is a screenshot of my Vim environment at this stage:</p>
+
+<p><img src="/assets/images/8025ac5dc0094513ada96a5dad91194f.png" alt="Screenshot 1" /></p>
+
+<p>The top window in the image above is for interacting with <code class="language-plaintext highlighter-rouge">gdb</code>. The middle window shows the output from our program when run. The bottom window is the editor window and as you can see, our code is displayed there. The buttons on top of this window (<code class="language-plaintext highlighter-rouge">Step</code>, <code class="language-plaintext highlighter-rouge">Next</code>, <code class="language-plaintext highlighter-rouge">Finish</code>, etcetera) are clickable.</p>
+
+<p>You can cycle through the windows using <code class="language-plaintext highlighter-rouge">CTRL+W</code>+<code class="language-plaintext highlighter-rouge">W</code> or <code class="language-plaintext highlighter-rouge">CTRL+W</code>+<code class="language-plaintext highlighter-rouge">H</code>/<code class="language-plaintext highlighter-rouge">J</code>/<code class="language-plaintext highlighter-rouge">K</code>/<code class="language-plaintext highlighter-rouge">L</code>.</p>
+
+<p>The arrangement of windows above isn’t my favourite, to make yours look like mine does below, add the following to your <code class="language-plaintext highlighter-rouge">.vimrc</code>:</p>
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">g:termdebug_wide</span><span class="p">=</span><span class="m">1</span>
+</code></pre></div></div>
+<p>When you close vim and open it again then run Termdebug, it will look like:</p>
+
+<p><img src="/assets/images/5c28c77e20ec4b0589da35e8f9020c95.png" alt="cap-2.png" /></p>
+
+<p>Now let’s see how to quit:</p>
+
+<h3 id="quit-debugging">Quit Debugging</h3>
+<p>To quit debugging, type the <code class="language-plaintext highlighter-rouge">quit</code> command in the <code class="language-plaintext highlighter-rouge">gdb</code> window:<br />
+<em>in the GDB window:</em></p>
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span>gdb<span class="p">)</span> <span class="k">quit</span>
+</code></pre></div></div>
+
+<h2 id="debugging-session">Debugging Session</h2>
+<p>Let us now modify our program a little bit to look like this:</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Hello world!"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">age</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Your age is: "</span> <span class="o">&lt;&lt;</span> <span class="n">age</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">argc</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Command line argument: "</span> <span class="o">&lt;&lt;</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+
+        <span class="n">string</span> <span class="n">name</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">name</span> <span class="o">==</span> <span class="s">"world"</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"We are the world, We are the children"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">sum</span> <span class="o">+=</span> <span class="n">i</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"The sum of 1 to 5 is: "</span> <span class="o">&lt;&lt;</span> <span class="n">sum</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>The program now checks if there is a command-line argument and if there is one it prints it out. Compile it. You can do this from vim using <code class="language-plaintext highlighter-rouge">!</code>:</p>
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">:!</span>gdb hello<span class="p">.</span><span class="nb">cpp</span> <span class="p">-</span><span class="k">g</span> <span class="p">-</span><span class="k">o</span> hello
+</code></pre></div></div>
+<p>Load the program:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:Termdebug hello
+</code></pre></div></div>
+
+<h3 id="command-line-arguments">Command line arguments</h3>
+<p>By seeing <code class="language-plaintext highlighter-rouge">argc</code> and <code class="language-plaintext highlighter-rouge">argv</code> you already know that this program accepts command line arguments, ideally one, for this program. It could be any arbitrary text. To pass the command line arguments, we could do either of the two:</p>
+<ul>
+  <li>Through Vim’s <code class="language-plaintext highlighter-rouge">Arguments</code> command.
+    <div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">:</span>Arguments world
+</code></pre></div>    </div>
+  </li>
+  <li>In the future should you want to pass multiple arguments to another program, you could still do something like:
+    <div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">:</span>Arguments <span class="p">-</span><span class="k">d</span> hello <span class="p">-</span><span class="k">n</span> <span class="m">8</span> <span class="p">--</span>some<span class="p">-</span>arg world
+</code></pre></div>    </div>
+  </li>
+  <li>Through <code class="language-plaintext highlighter-rouge">gdb</code>. This can be done using <code class="language-plaintext highlighter-rouge">set args</code>
+    <div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">set</span> <span class="k">args</span> world
+</code></pre></div>    </div>
+  </li>
+  <li>In the future if you wanted to run some program that accepts several command-line arguments, you could:
+    <div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span>gdb<span class="p">)</span> <span class="k">set</span> <span class="k">args</span> <span class="p">-</span><span class="k">d</span> hello <span class="p">-</span><span class="k">n</span> <span class="m">8</span> <span class="p">--</span>some<span class="p">-</span>arg world
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="setting-and-clearing-breakpoints">Setting and Clearing Breakpoints</h3>
+<p>Now that the program is loaded, you can set breakpoints either in the editor or in the <code class="language-plaintext highlighter-rouge">gdb</code> window:</p>
+
+<h4 id="in-the-editor-window">In the Editor Window</h4>
+<p>Move the cursor to the line you want to set the breakpoint, then enter the <code class="language-plaintext highlighter-rouge">:Break</code> command. In our sample program, we can navigate to line <code class="language-plaintext highlighter-rouge">15</code> then run <code class="language-plaintext highlighter-rouge">:Break</code>.
+To clear a breakpoint, navigate the cursor to the line with the breakpoint then run <code class="language-plaintext highlighter-rouge">:Clear</code>.</p>
+
+<h4 id="in-the-gdb-window">In the <code class="language-plaintext highlighter-rouge">gdb</code> window</h4>
+<p>The normal <code class="language-plaintext highlighter-rouge">gdb</code> commands still work:</p>
+<ul>
+  <li>Set a breakpoint
+    <div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span>gdb<span class="p">)</span> <span class="k">break</span> hello<span class="p">.</span><span class="nb">cpp</span><span class="p">:</span><span class="m">15</span>
+</code></pre></div>    </div>
+    <p>or</p>
+    <div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span>gdb<span class="p">)</span> <span class="k">break</span> <span class="m">15</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Deleting a breakpoint: Note that when you set a breakpoint, the line number is preceded with a number indicating the breakpoint number. Since the breakpoint on line 15 is the first breakpoint we have set in this program, we can delete the breakpoint using the <code class="language-plaintext highlighter-rouge">delete</code> or <code class="language-plaintext highlighter-rouge">del</code> command that accepts as an argument the breakpoint number.
+    <div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span>gdb<span class="p">)</span> del <span class="m">1</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>In both cases, you’ll get an indication that the breakpoint has been set by seeing the breakpoint number, in our case <code class="language-plaintext highlighter-rouge">1</code> in line <code class="language-plaintext highlighter-rouge">15</code> in the editor window. Set other breakpoints in lines <code class="language-plaintext highlighter-rouge">22</code> and <code class="language-plaintext highlighter-rouge">25</code>. Your window should now look like:</p>
+
+<p><img src="/assets/images/2ce4eb080c2445fea7e311a1a3d41b8c.png" alt="2020-11-23-151829_1920x1052_scrot.png" /></p>
+
+<h3 id="run-the-program">Run the Program</h3>
+<p>Let us now run the program. This can be done:</p>
+<ul>
+  <li>Through Vim’s <code class="language-plaintext highlighter-rouge">:Run</code> or</li>
+  <li>Through <code class="language-plaintext highlighter-rouge">gdb</code>:
+    <pre><code class="language-gdb">(gdb) run
+</code></pre>
+    <p>The program execution will halt at line 15.</p>
+  </li>
+</ul>
+
+<h4 id="values-of-variables">Values of variables</h4>
+<ul>
+  <li>In the editor window:
+You can check the value of variables by moving the cursor to them then running <code class="language-plaintext highlighter-rouge">:Evaluate</code>. <code class="language-plaintext highlighter-rouge">Evaluate</code> by default shows the value of the variable under the cursor. This can also be achieved by pressing the key <code class="language-plaintext highlighter-rouge">K</code> while the cursor is over the variable.<br />
+You can also pass as an argument the name of the variable whose value you want to see, for example <code class="language-plaintext highlighter-rouge">:Evaluate age</code>.</li>
+  <li>In <code class="language-plaintext highlighter-rouge">gdb</code>’s window, you can also check the value of the variable using the <code class="language-plaintext highlighter-rouge">print</code> or <code class="language-plaintext highlighter-rouge">p</code> command.
+    <div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span>gdb<span class="p">)</span> <span class="k">print</span> name
+<span class="p">(</span>gdb<span class="p">)</span> <span class="k">p</span> age
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h4 id="bulb-quick-tip-bulb">:bulb: Quick Tip :bulb:</h4>
+<blockquote>
+  <p>While checking the value of a variable, you can see <code class="language-plaintext highlighter-rouge">&lt;optimized out&gt;</code> as its value. Most compilers do optimizations that result in the value of the variable not being seen in the debugger. If you want to see the value of the variable, you have to add the <code class="language-plaintext highlighter-rouge">volatile</code> specifier to it and then recompile the entire program again. For example:</p>
+  <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">volatile</span> <span class="kt">double</span> <span class="n">randomVariable</span><span class="p">;</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<h4 id="continuing-with-execution">Continuing with Execution</h4>
+<p>Let us now continue with our program execution. To do this, you can:</p>
+<ol>
+  <li>Click on the <code class="language-plaintext highlighter-rouge">Cont</code> button on top of the editor window or</li>
+  <li>Run the <code class="language-plaintext highlighter-rouge">:Continue</code> command in vim’s last-line mode or</li>
+  <li>Run <code class="language-plaintext highlighter-rouge">continue</code> or <code class="language-plaintext highlighter-rouge">c</code> in <code class="language-plaintext highlighter-rouge">gdb</code>:
+    <div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span>gdb<span class="p">)</span> <span class="k">c</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>Now have fun as you explore the program further.</p>
+
+<h2 id="resources-for-further-exploration">Resources for Further Exploration</h2>
+<ul>
+  <li><a href="https://www.dannyadam.com/blog/2019/05/debugging-in-vim/">Danny Adam’s Blog</a></li>
+  <li><a href="https://vimhelp.org/terminal.txt.html#terminal-debug">Vim Help</a></li>
+</ul>
+:ET
