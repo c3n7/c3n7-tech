@@ -1,9 +1,12 @@
 ---
 title:  "Debugging C++ in Vim"
 date: 2021-07-11T16:04:46+03:00
-subheading: "GDB and Vim for debugging C++ programs"
+author: "Timothy Karani"
+authorTwitter: "c3n7_luc"
+description: "GDB and Vim for debugging C++ programs"
 tags: ["c++", "vim"]
-banner: "/assets/images/computer.jpg"
+keywords: ["cplusplus" ,"vim", "programming"]
+cover: "/images/computer.jpg"
 draft: true
 ---
 
@@ -210,11 +213,11 @@ You can also pass as an argument the name of the variable whose value you want t
 (gdb) p age
 ```
 
-#### :bulb: Quick Tip :bulb:
+> #### QuickTip
 > While checking the value of a variable, you can see `<optimized out>` as its value. Most compilers do optimizations that result in the value of the variable not being seen in the debugger. If you want to see the value of the variable, you have to add the `volatile` specifier to it and then recompile the entire program again. For example:
-```c++
-volatile double randomVariable;
-```
+> ```c++
+> volatile double randomVariable;
+> ```
 
 #### Continuing with Execution
 Let us now continue with our program execution. To do this, you can:
