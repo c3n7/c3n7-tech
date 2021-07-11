@@ -2,8 +2,8 @@
 title = "Django Project Structure"
 description = "An overview of Django projects."
 date = "2020-10-30T17:54:41+03:00"
-author = ""
-authorTwitter = "" #do not include @
+author = "Timothy Karani"
+authorTwitter = "c3n7_luc" #do not include @
 cover = "/images/keyboard.jpg"
 tags = ["django", "python"]
 keywords = ["django", "python"]
