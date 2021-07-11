@@ -48,7 +48,7 @@ paginate = 5
   [languages.en]
     languageName = "English"
     title = "c3n7"
-    subtitle = "A simple, retro theme for Hugo"
+    subtitle = "Coffee, programming and other dev-related banter."
     owner = ""
     keywords = ""
     copyright = ""

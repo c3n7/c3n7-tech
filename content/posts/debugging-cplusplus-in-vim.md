@@ -81,7 +81,7 @@ Once you have started `Termdebug`, you can run it either of the following two wa
 Here is a screenshot of my Vim environment at this stage:
 
 
-![Screenshot 1](/assets/images/8025ac5dc0094513ada96a5dad91194f.png)
+![Screenshot 1](/images/8025ac5dc0094513ada96a5dad91194f.png)
 
 The top window in the image above is for interacting with `gdb`. The middle window shows the output from our program when run. The bottom window is the editor window and as you can see, our code is displayed there. The buttons on top of this window (`Step`, `Next`, `Finish`, etcetera) are clickable.
 
@@ -93,7 +93,7 @@ let g:termdebug_wide=1
 ```
 When you close vim and open it again then run Termdebug, it will look like:
 
-![cap-2.png](/assets/images/5c28c77e20ec4b0589da35e8f9020c95.png)
+![cap-2.png](/images/5c28c77e20ec4b0589da35e8f9020c95.png)
 
 Now let's see how to quit:
 
@@ -188,7 +188,7 @@ or
 In both cases, you'll get an indication that the breakpoint has been set by seeing the breakpoint number, in our case `1` in line `15` in the editor window. Set other breakpoints in lines `22` and `25`. Your window should now look like:
 
 
-![2020-11-23-151829_1920x1052_scrot.png](/assets/images/2ce4eb080c2445fea7e311a1a3d41b8c.png)
+![2020-11-23-151829_1920x1052_scrot.png](/images/2ce4eb080c2445fea7e311a1a3d41b8c.png)
 
 
 ### Run the Program
