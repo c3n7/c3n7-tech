@@ -7,7 +7,7 @@ description: "GDB and Vim for debugging C++ programs"
 tags: ["c++", "vim"]
 keywords: ["cplusplus" ,"vim", "programming"]
 cover: "/images/computer.jpg"
-draft: true
+draft: false
 ---
 
 Vim can work with GDB to debug C++ programs. This feature works in Vim version 8.1+. In this blog post, we'll go through debugging C++ in Vim.
