@@ -1,0 +1,14 @@
+<script>
+  // vim:filetype=htmldjango
+</script>
+{{ $dateTime := .PublishDate.Format "2006-01-02" }}
+{{ $dateFormat := .Site.Params.dateFormat | default "Jan 2, 2006" }}
+<span uk-icon="icon: calendar"></span>
+<time datetime="{{ $dateTime }}">{{ .PublishDate.Format $dateFormat }}</time>
+{{ with .Param.tags }}
+  <span uk-icon="icon: tag"></span>
+  {{ range . }}
+    {{ $href := print (absURL "tags/") (urlize .) }}
+    <a class="uk-button uk-button-default" href="{{ $href }}"> {{ . }}</a>
+  {{ end }}
+{{ end }}

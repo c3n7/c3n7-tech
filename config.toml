@@ -1,3 +1,20 @@
 baseURL = "http://c3n7.tech/"
 languageCode = "en-us"
 title = "Coffee, graphics, game programming and dev banter"
+theme="c3n7-tech-theme"
+[menu]
+  [[menu.main]]
+    name = "Home"
+    pre = "home"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    name = "Posts"
+    pre = "pencil"
+    url = "/posts/"
+    weight = 2
+  [[menu.main]]
+    name = "Tags"
+    pre = "tag"
+    url = "/tags/"
+    weight = 3
