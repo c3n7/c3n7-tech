@@ -10,7 +10,7 @@ paginate = 5
   contentTypeName = "posts"
 
   # ["orange", "blue", "red", "green", "pink"]
-  themeColor = "green"
+  themeColor = "red"
 
   # if you set this to 0, only submenu trigger will be visible
   showMenuItems = 2
@@ -41,13 +41,13 @@ paginate = 5
   # set Twitter handles for Twitter cards
   # see https://developer.twitter.com/en/docs/tweets/optimize-with-cards/guides/getting-started#card-and-content-attribution
   # do not include @
-  creator = ""
-  site = ""
+  creator = "c3n7"
+  site = "https://c3n7.tech"
 
 [languages]
   [languages.en]
     languageName = "English"
-    title = "Terminal"
+    title = "c3n7"
     subtitle = "A simple, retro theme for Hugo"
     owner = ""
     keywords = ""
@@ -61,7 +61,7 @@ paginate = 5
     missingBackButtonLabel = "Back to home page"
 
     [languages.en.params.logo]
-      logoText = "Terminal"
+      logoText = "c3n7"
       logoHomeLink = "/"
 
     [languages.en.menu]
