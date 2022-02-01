@@ -2,3 +2,4 @@ public/
 .firebase/
 .firebaserc
 firebase.json
+.hugo_build.lock
