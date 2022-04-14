@@ -106,7 +106,7 @@ Once you've mapped the keys, you can fire open Krita and draw to your heart's co
 
 ## Tips
 
-You can view all mappable keys/modifires with. Sometimes they don't map as we expect (example `[`, `]` and `+`), but with a bit of Googling you will find your solution:
+You can view all mappable keys/modifires with the command below. Sometimes they don't map as we expect (example `[`, `]` and `+`), but with a bit of Googling you will find your solution:
 
 ```shell
 $ xsetwacom --list modifiers
