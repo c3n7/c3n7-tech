@@ -50,6 +50,7 @@ xsetwacom --set 'HUION Huion Tablet_HS611 Pad pad' Button 8 "key ctrl shift ="
 xsetwacom --set 'HUION Huion Tablet_HS611 Pad pad' Button 9 "key ctrl -"
 
 #bottom set
+# https://askubuntu.com/a/1193029
 xsetwacom --set 'HUION Huion Tablet_HS611 Pad pad' Button 10 "key +ISO_Level3_Shift +9"
 xsetwacom --set 'HUION Huion Tablet_HS611 Pad pad' Button 11 "key 4"
 xsetwacom --set 'HUION Huion Tablet_HS611 Pad pad' Button 12 "key del"
