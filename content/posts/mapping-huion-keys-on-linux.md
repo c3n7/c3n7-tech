@@ -67,28 +67,28 @@ xsetwacom --set 'HUION Huion Tablet_HS611 stylus' Button 3 "key e"
 
 The mappings are configured with Krita in mind:
 
-1. Pad Mappings:
+**Pad Mappings**:
 
-   | Button    | Mapping                                               | Function            |
-   | :-------- | :---------------------------------------------------- | :------------------ |
-   | Button 1  | `Ctrl` + `Shift` + `Z`                                | Redo                |
-   | Button 2  | `Ctrl` + `Z`                                          | Undo                |
-   | Button 3  | `Ctrl` + `P`                                          | Pan Mode            |
-   | Button 8  | `Ctrl` + `Shift` + `=` (equivalent to `ctrl` + `+`)   | Zoom In             |
-   | Button 9  | `Ctrl` + `-`                                          | Zoom Out            |
-   | --        | --                                                    | --                  |
-   | Button 10 | `+ISO_Level3_Shift` + `+9` (aka `altgr` + `9` or `]`) | Increase brush size |
-   | Button 11 | `4`                                                   | Rotate Left         |
-   | Button 12 | `del`                                                 | Clear Canvas        |
-   | Button 13 | `6`                                                   | Rotate Right        |
-   | Button 14 | `+ISO_Level3_Shift` + `+8` (aka `altgr` + `8` or `[`) | Decrease brush size |
+| Button    | Mapping                                               | Function            |
+| :-------- | :---------------------------------------------------- | :------------------ |
+| Button 1  | `Ctrl` + `Shift` + `Z`                                | Redo                |
+| Button 2  | `Ctrl` + `Z`                                          | Undo                |
+| Button 3  | `Ctrl` + `P`                                          | Pan Mode            |
+| Button 8  | `Ctrl` + `Shift` + `=` (equivalent to `ctrl` + `+`)   | Zoom In             |
+| Button 9  | `Ctrl` + `-`                                          | Zoom Out            |
+| --        | --                                                    | --                  |
+| Button 10 | `+ISO_Level3_Shift` + `+9` (aka `altgr` + `9` or `]`) | Increase brush size |
+| Button 11 | `4`                                                   | Rotate Left         |
+| Button 12 | `del`                                                 | Clear Canvas        |
+| Button 13 | `6`                                                   | Rotate Right        |
+| Button 14 | `+ISO_Level3_Shift` + `+8` (aka `altgr` + `8` or `[`) | Decrease brush size |
 
-2. Stylus Mappings:
+**Stylus Mappings**:
 
-   | Button   | Mapping | Function    |
-   | :------- | :------ | :---------- |
-   | Button 1 | `b`     | Brush Tool  |
-   | Button 2 | `e`     | Eraser Tool |
+| Button   | Mapping | Function    |
+| :------- | :------ | :---------- |
+| Button 1 | `b`     | Brush Tool  |
+| Button 2 | `e`     | Eraser Tool |
 
 With that done, let us now give execution permissions to our script file:
 
