@@ -12,3 +12,71 @@ params:
   title: ExampleSite
   description: "ExampleSite description"
   keywords: [Blog, Portfolio, PaperMod]
+
+  author: Me
+  # author: ["Me", "You"] # multiple authors
+  images: ["<link or path of image for opengraph, twitter-cards>"]
+  DateFormat: "January 2, 2006"
+  defaultTheme: auto # dark, light
+  disableThemeToggle: false
+
+  ShowReadingTime: true
+  ShowShareButtons: true
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: false
+  ShowWordCount: true
+  ShowRssButtonInSectionTermList: true
+  UseHugoToc: true
+  disableSpecial1stPost: false
+  disableScrollToTop: false
+  comments: false
+  hidemeta: false
+  hideSummary: false
+  showtoc: false
+  tocopen: false
+
+  assets:
+    # disableHLJS: true # to disable highlight.js
+    # disableFingerprinting: true
+    favicon: "/images/favicon.ico"
+    favicon32x32: "/images/favicon.ico"
+
+    # profile-mode
+  profileMode:
+    enabled: false # needs to be explicitly set
+    title: ExampleSite
+    subtitle: "This is subtitle"
+    imageUrl: "<img location>"
+    imageWidth: 120
+    imageHeight: 120
+    imageTitle: my image
+    buttons:
+      - name: Posts
+        url: posts
+      - name: Tags
+        url: tags
+
+  # home-info mode
+  homeInfoParams:
+    Title: "c3n7 (`/seɪnt,snt/`)"
+    Content: >
+      Welcome to my blog, kind stranger.
+      I am Timothy Karani, from Nairobi, Kenya. Below you'll find my tips, tricks, guides, notes and more.
+
+  socialIcons:
+    - name: github
+      url: "https://github.com/c3n7"
+    - name: linkedin
+      url: "https://www.linkedin.com/in/timothy-karani-m/"
+    - name: Rss
+      url: "index.xml"
+menu:
+  main:
+    - name: Archives
+      url: archives/
+      weight: 5
+    - identifier: Tags
+      name: Tags
+      url: /tags/
+      weight: 20
