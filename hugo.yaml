@@ -1,3 +1,14 @@
 baseURL: https://example.org/
 languageCode: en-us
-title: My New Hugo Site
+title: c3n7
+theme: PaperMod
+
+minify:
+  disableXML: true
+  minifyOutput: true
+
+params:
+  env: production # to enable google analytics, opengraph, twitter-cards and schema.
+  title: ExampleSite
+  description: "ExampleSite description"
+  keywords: [Blog, Portfolio, PaperMod]

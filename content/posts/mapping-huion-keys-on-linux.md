@@ -1,13 +1,13 @@
-+++
-title = "Mapping Huion Keys on Linux"
-date = "2022-04-14T01:24:49+03:00"
-author = "Timothy Karani"
-authorTwitter = "c3n7_luc"
-tags = ["krita", "drawing", "linux"]
-keywords = ["krita", "drawing", "linux"]
-description = "Using xsetwacom to map huion's tablet and pen buttons"
-draft = false
-+++
+---
+title: "Mapping Huion Keys on Linux"
+date: "2022-04-14T01:24:49+03:00"
+author: "Timothy Karani"
+authorTwitter: "c3n7_luc"
+tags: ["krita", "drawing", "linux"]
+keywords: ["krita", "drawing", "linux"]
+description: "Using xsetwacom to map huion's tablet and pen buttons"
+draft: false
+---
 
 ## Introduction
 
