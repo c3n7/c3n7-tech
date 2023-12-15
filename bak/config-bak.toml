@@ -1,7 +1,6 @@
 baseURL = "https://c3n7.tech/"
-languageCode = "en-us"
 title = "Coffee, graphics, game programming and dev banter"
-theme = "terminal"
+theme = "PaperMod"
 paginate = 5
 
 [markup.goldmark.renderer]
