@@ -11,7 +11,7 @@ draft: false
 
 ## Introduction
 
-On a production environment I was watching a query I had just made attempts at optimization taking longer and longer as days went. Usually I would look at `WHERE` clauses to inform me on indexes that need creating or queries that need restructring but often overlooked `ORDER BY` clauses, turns out both need equal attention.
+On a production environment I was watching a query I had just made attempts at optimizing take longer and longer as days went. Usually I would look at `WHERE` clauses to inform me on indexes that need creating or queries that need restructuring but often overlooked `ORDER BY` clauses, turns out both need equal attention.
 
 ## Reproduction
 
@@ -212,7 +212,7 @@ I will be using Laravel for this because of easy `EXPLAIN` statements provided b
   | ------- | ----- | ------------- | ------- | ------- | --- | ---- | ----- |
   | clients | index |               | PRIMARY | 8       |     | 1    |       |
 
-  This one takes `1.74ms`, doesn't load close to a million records to memory, looks alrights.
+  This one takes `1.74ms`, doesn't load close to a million records to memory, looks alright.
 
 ## TL;DR
 
