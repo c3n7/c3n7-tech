@@ -5,7 +5,7 @@ author: "Timothy Karani"
 authorTwitter: "c3n7_luc"
 tags: ["sql", "laravel"]
 keywords: ["sql", "laravel"]
-description: "Permonce gotcha when doing an ORDER BY x LIMIT y SQL query"
+description: "Perfomance gotcha when doing an ORDER BY x LIMIT y SQL query"
 draft: false
 ---
 
