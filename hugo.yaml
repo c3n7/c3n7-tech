@@ -3,6 +3,8 @@ languageCode: en-us
 title: c3n7
 theme: PaperMod
 
+googleAnalytics: G-PB94M285WT
+
 minify:
   disableXML: true
   minifyOutput: true
