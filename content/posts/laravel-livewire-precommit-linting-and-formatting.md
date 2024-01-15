@@ -113,7 +113,7 @@ We have all the packages needed for static analysis and code formatting so now l
 
    - `--ignore-unknown` prevents the command from returning a non-zero result if no match is found in our filter
    - `--write` tells prettier to write the formatting changes to the respective files
-   - `--diff-filter=ACMR HEAD` matches files that have either been [**A**dded, **C**opied, **M**odified, or **R**enamed](https://stackoverflow.com/a/6879568). `HEAD` adds to this filter by matching files that have gone through either of the aforementioned changes, whether they have been stagged for commit or not. If this is not the desired behaviour [this resource should come in handy](https://stackoverflow.com/a/1587952)
+   - `--diff-filter=ACMR HEAD` matches files that have either been [**A**dded, **C**opied, **M**odified, or **R**enamed](https://stackoverflow.com/a/6879568). `HEAD` adds to this filter by matching files that have gone through either of the aforementioned changes, whether they have been staged for commit or not. If this is not the desired behaviour [this resource should come in handy](https://stackoverflow.com/a/1587952)
 
 3. Make the `.husky/pre-commit` executable:
    ```shell
